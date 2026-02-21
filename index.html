@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Sa'yo 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rose: #e8637a;
+    --blush: #f9c4d2;
+    --cream: #fff8f5;
+    --dark: #3a1a22;
+    --gold: #d4a96a;
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Floating petals */
+  .petal {
+    position: fixed;
+    font-size: 1.2rem;
+    animation: fall linear infinite;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-60px) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Card */
+  .card {
+    position: relative;
+    z-index: 1;
+    background: white;
+    border-radius: 24px;
+    padding: 60px 50px;
+    max-width: 520px;
+    width: 90%;
+    box-shadow: 0 20px 80px rgba(232, 99, 122, 0.18), 0 4px 20px rgba(0,0,0,0.06);
+    text-align: center;
+    animation: rise 1s cubic-bezier(.22,.68,0,1.2) both;
+    border: 1px solid rgba(232,99,122,0.12);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .heart-icon {
+    font-size: 3rem;
+    animation: pulse 1.4s ease-in-out infinite;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+  }
+
+  .tag {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadein 0.8s 0.4s forwards;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadein 0.8s 0.6s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 auto 28px;
+    width: 80%;
+    opacity: 0;
+    animation: fadein 0.8s 0.8s forwards;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--blush);
+  }
+
+  .divider-icon { color: var(--gold); font-size: 1rem; }
+
+  p {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #6b4050;
+    line-height: 1.85;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadein 0.8s 1s forwards;
+  }
+
+  p.second { animation-delay: 1.2s; }
+
+  .signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--rose);
+    margin-top: 32px;
+    opacity: 0;
+    animation: fadein 0.8s 1.5s forwards;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 14px 36px;
+    background: var(--rose);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    opacity: 0;
+    animation: fadein 0.8s 1.8s forwards;
+    box-shadow: 0 6px 24px rgba(232,99,122,0.35);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(232,99,122,0.45);
+  }
+
+  @keyframes fadein {
+    to { opacity: 1; }
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--dark);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: all 0.4s;
+    pointer-events: none;
+    z-index: 99;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Falling petals -->
+<div id="petals"></div>
+
+<div class="card">
+  <span class="heart-icon">💗</span>
+  <div class="tag">para sa espesyal na tao</div>
+
+  <h1>Hey,<br><em>Amiel Loraine Espiritu</em> 🌸</h1>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-icon">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <p>Amiel Loraine, alam mo ba na kahit hindi pa tayo gaanong nagkikilala, may something ka na hindi ko mapigilang mapansin? Yung ngiti mo, yung paraan mo — parang may magic.</p>
+
+  <p class="second">Sana habang tumatagal, mas marami pa tayong ma-usap. Kasi honestly? Gusto ko pa kitang makilala nang mas malalim. 🥺</p>
+
+  <div class="signature">— Yung taong palihim na nag-iisip sa'yo 💌</div>
+
+  <button class="btn" onclick="sendLove()">💌 Send Love Back</button>
+</div>
+
+<div class="toast" id="toast">Natanggap ko ang iyong pagmamahal! 💕</div>
+
+<script>
+  // Generate petals
+  const emojis = ['🌸','🌺','💮','🌷','✿','❀'];
+  const container = document.getElementById('petals');
+
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (5 + Math.random() * 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.fontSize = (0.8 + Math.random() * 1) + 'rem';
+    container.appendChild(p);
+  }
+
+  function sendLove() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+
+    // Burst hearts
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'petal';
+        h.textContent = ['💕','💖','💗','💓'][Math.floor(Math.random()*4)];
+        h.style.left = (30 + Math.random()*40) + 'vw';
+        h.style.animationDuration = (2 + Math.random()*3) + 's';
+        h.style.animationDelay = '0s';
+        h.style.fontSize = '1.5rem';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 5000);
+      }, i * 120);
+    }
+  }
+</script>
+</body>
+</html>
