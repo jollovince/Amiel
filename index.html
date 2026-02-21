@@ -27,7 +27,6 @@
     position: relative;
   }
 
-  /* Floating petals */
   .petal {
     position: fixed;
     font-size: 1.2rem;
@@ -42,7 +41,6 @@
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
 
-  /* Card */
   .card {
     position: relative;
     z-index: 1;
@@ -88,10 +86,10 @@
 
   h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
+    font-size: 2.1rem;
     font-weight: 700;
     color: var(--dark);
-    line-height: 1.2;
+    line-height: 1.3;
     margin-bottom: 28px;
     opacity: 0;
     animation: fadein 0.8s 0.6s forwards;
@@ -170,7 +168,6 @@
     to { opacity: 1; }
   }
 
-  /* Toast */
   .toast {
     position: fixed;
     bottom: 40px;
@@ -192,7 +189,6 @@
 </head>
 <body>
 
-<!-- Falling petals -->
 <div id="petals"></div>
 
 <div class="card">
@@ -207,19 +203,18 @@
     <div class="divider-line"></div>
   </div>
 
-  <p>Amiel Loraine, alam mo ba na kahit hindi pa tayo gaanong nagkikilala, may something ka na hindi ko mapigilang mapansin? Yung ngiti mo, yung paraan mo — parang may magic.</p>
+  <p>Hindi ko alam kung papansinin mo 'to, pero may something sa'yo na hindi ko mapigilan. Yung simpleng paraan mo, yung ngiti mo — kahit hindi mo alam, naiisip kita.</p>
 
-  <p class="second">Sana habang tumatagal, mas marami pa tayong ma-usap. Kasi honestly? Gusto ko pa kitang makilala nang mas malalim. 🥺</p>
+  <p class="second">Ayaw ko pang sabihin lahat... pero sana habang lumilipas ang oras, mas malapit pa tayo. Kasi honestly? Gusto kita pang makilala ng higit pa. 🥺</p>
 
-  <div class="signature">— Yung taong palihim na nag-iisip sa'yo 💌</div>
+  <div class="signature">— Yung taong may tinatago pang salita 💌</div>
 
   <button class="btn" onclick="sendLove()">💌 Send Love Back</button>
 </div>
 
-<div class="toast" id="toast">Natanggap ko ang iyong pagmamahal! 💕</div>
+<div class="toast" id="toast">Naramdaman ko 'yan 💕</div>
 
 <script>
-  // Generate petals
   const emojis = ['🌸','🌺','💮','🌷','✿','❀'];
   const container = document.getElementById('petals');
 
@@ -239,7 +234,6 @@
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
 
-    // Burst hearts
     for (let i = 0; i < 8; i++) {
       setTimeout(() => {
         const h = document.createElement('div');
